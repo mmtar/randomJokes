@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Jokes - Chuck Norris</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .navbar {
+      background: #808080;
+      height: 2rem;
+      width: 100%;
+      color: white;
+    }
+
+    .container {
+      width: 80%;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="navbar">
+    <div class="container"><span>home</span></div>
+  </div>
+  <section id="chucknorris">
+    <div class="container">
+
+
+      <img src="" alt="" srcset="">
+      <p></p>
+    </div>
+  </section>
+  <script>
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+      if (this.status != 200) {
+        console.log(`${this.statusText}`);
+      }
+      const data = (JSON.parse(this.response));
+      // console.log(data);
+      const value = (data.value);
+      const imgsrc = data.icon_url;
+      document.querySelector('#chucknorris img').src = imgsrc;
+      document.querySelector('#chucknorris p').textContent = value;
+
+    }
+    xhr.onerror = function () {
+      console.log('Error occured');
+    }
+    xhr.open('GET', 'https://api.chucknorris.io/jokes/random', true);
+    xhr.send();
+  </script>
+</body>
+
+</html>
